@@ -3,7 +3,7 @@ import torch
 import logging
 
 try:
-    import pyo3_inox2d as inox
+    import inox2d as inox
 except ImportError:
     inox = None
 
@@ -13,7 +13,7 @@ logger = logging.getLogger("Inochi2D-Renderer")
 class InochiRendererWrapper:
     def __init__(self):
         if inox is None:
-            logger.warning("pyo3-inox2d not found. Renderer will operate in mock mode.")
+            logger.warning("inox2d not found. Renderer will operate in mock mode.")
             self.context = None
         else:
             try:
