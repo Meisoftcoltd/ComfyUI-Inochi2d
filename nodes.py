@@ -51,13 +51,23 @@ class Inochi2DLoader:
         if not os.path.exists(path):
             raise FileNotFoundError(f"Model file not found: {path}")
 
-        # Detection of PSD textures for .inx models
+        # Detection of textures for .inx models
         if model_file.endswith('.inx'):
-            psd_dir = os.path.join(os.path.dirname(path), "psd")
+            model_dir = os.path.dirname(path)
+            png_files = [f for f in os.listdir(model_dir) if f.lower().endswith('.png')]
+
+            if not png_files:
+                print(f"### [Inochi2D] ADVERTENCIA: No se encontraron archivos .png en {model_dir}")
+                print(f"### [Inochi2D] Los archivos .inx suelen requerir texturas externas. Si el renderizado es negro, asegúrate de que los atlas .png estén en la misma carpeta.")
+            else:
+                print(f"### [Inochi2D] Detectadas {len(png_files)} texturas .png para el modelo .inx")
+
+            # Legacy/Optional: check for PSD textures if they exist in a psd/ subdirectory
+            psd_dir = os.path.join(model_dir, "psd")
             if os.path.exists(psd_dir):
                 for f in os.listdir(psd_dir):
                     if f.endswith('.psd'):
-                        print(f"### [Inochi2D] Cargando texturas del archivo {f}")
+                        print(f"### [Inochi2D] Encontrada textura PSD: {f}")
 
         # Fix: Change working directory to the model's directory to resolve relative paths in .inx
         old_cwd = os.getcwd()
