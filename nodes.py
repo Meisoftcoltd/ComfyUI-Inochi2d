@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import torch
 import numpy as np
@@ -7,7 +8,13 @@ from .core.assets_manager import AssetsManager
 from .core.parameters import ParameterController
 
 # Global renderer wrapper instance to manage context
-_renderer_wrapper = InochiRendererWrapper()
+_renderer_wrapper = None
+
+def _get_renderer():
+    global _renderer_wrapper
+    if _renderer_wrapper is None:
+        _renderer_wrapper = InochiRendererWrapper()
+    return _renderer_wrapper
 
 def _safe_puppet_copy(puppet):
     """
@@ -73,7 +80,7 @@ class Inochi2DLoader:
         old_cwd = os.getcwd()
         os.chdir(os.path.dirname(path))
         try:
-            puppet = _renderer_wrapper.load_model(path)
+            puppet = _get_renderer().load_model(path)
         finally:
             os.chdir(old_cwd)
 
@@ -171,5 +178,5 @@ class Inochi2DRenderer:
 
     def render(self, inochi_model, width, height, aa_level):
         print(f"### [Inochi2D] Renderizando frame: {width}x{height}, AA: {aa_level}")
-        image, mask = _renderer_wrapper.render_frame(inochi_model, width, height, aa_level)
+        image, mask = _get_renderer().render_frame(inochi_model, width, height, aa_level)
         return (image, mask)
