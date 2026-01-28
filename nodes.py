@@ -35,6 +35,7 @@ class Inochi2DLoader:
         return {"required": {"model_file": (models,)}}
 
     RETURN_TYPES = ("INOCHI_MODEL",)
+    RETURN_NAMES = ("INOCHI_MODEL",)
     FUNCTION = "load_model"
     CATEGORY = "Inochi2D 🎬"
 
@@ -58,6 +59,7 @@ class Inochi2DAssetProp:
         }
 
     RETURN_TYPES = ("INOCHI_MODEL",)
+    RETURN_NAMES = ("INOCHI_MODEL",)
     FUNCTION = "inject_asset"
     CATEGORY = "Inochi2D 🎬"
 
@@ -91,6 +93,7 @@ class Inochi2DParameterControl:
         }
 
     RETURN_TYPES = ("INOCHI_MODEL",)
+    RETURN_NAMES = ("INOCHI_MODEL",)
     FUNCTION = "control_parameters"
     CATEGORY = "Inochi2D 🎬"
 
@@ -126,6 +129,7 @@ class Inochi2DRenderer:
         }
 
     RETURN_TYPES = ("IMAGE", "MASK")
+    RETURN_NAMES = ("IMAGE", "MASK")
     FUNCTION = "render"
     CATEGORY = "Inochi2D 🎬"
 

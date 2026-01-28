@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI-Inochi2d"
 description = "Native Inochi2D rendering and manipulation for ComfyUI"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
     "numpy>=1.26.0",
     "torch>=2.2.0",
@@ -9,7 +9,16 @@ dependencies = [
     "python-osc>=1.8.3",
     "Pillow>=10.2.0"
 ]
+readme = "README.md"
+license = {text = "MIT"}
 
 [tool.comfyui]
 display_name = "Inochi2D"
 author = "Jules"
+project_url = "https://github.com/Jules/ComfyUI-Inochi2d"
+nodes = [
+    "Inochi2DLoader",
+    "Inochi2DAssetProp",
+    "Inochi2DParameterControl",
+    "Inochi2DRenderer"
+]
