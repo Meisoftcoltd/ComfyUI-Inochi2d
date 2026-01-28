@@ -28,19 +28,26 @@ class Inochi2DLoader:
     @classmethod
     def INPUT_TYPES(s):
         assets_dir = os.path.join(os.path.dirname(__file__), "assets", "characters")
-        models = [f for f in os.listdir(assets_dir) if f.endswith(('.inp', '.inx'))] if os.path.exists(assets_dir) else []
+        if not os.path.exists(assets_dir):
+            os.makedirs(assets_dir, exist_ok=True)
 
-        if not models:
-            return {"required": {"model_file": ("STRING", {"default": ""})}}
-        return {"required": {"model_file": (models,)}}
+        models = [f for f in os.listdir(assets_dir) if f.endswith(('.inp', '.inx'))]
+
+        return {"required": {"model_file": (models if models else ["None"],)}}
 
     RETURN_TYPES = ("INOCHI_MODEL",)
     FUNCTION = "load_model"
     CATEGORY = "Inochi2D 🎬"
 
     def load_model(self, model_file):
+        if model_file == "None":
+            raise ValueError("No model file selected or available.")
+
         base_path = os.path.join(os.path.dirname(__file__), "assets", "characters")
         path = os.path.join(base_path, model_file)
+
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Model file not found: {path}")
 
         puppet = _renderer_wrapper.load_model(path)
         return (puppet,)
