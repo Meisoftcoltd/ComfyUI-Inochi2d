@@ -29,15 +29,14 @@ class Inochi2DLoader:
     def INPUT_TYPES(s):
         assets_dir = os.path.join(os.path.dirname(__file__), "assets", "characters")
         models = [f for f in os.listdir(assets_dir) if f.endswith(('.inp', '.inx'))] if os.path.exists(assets_dir) else []
-        return {
-            "required": {
-                "model_file": (models if models else "STRING", {"default": ""}),
-            }
-        }
+
+        if not models:
+            return {"required": {"model_file": ("STRING", {"default": ""})}}
+        return {"required": {"model_file": (models,)}}
 
     RETURN_TYPES = ("INOCHI_MODEL",)
     FUNCTION = "load_model"
-    CATEGORY = "Inochi2D"
+    CATEGORY = "Inochi2D 🎭"
 
     def load_model(self, model_file):
         base_path = os.path.join(os.path.dirname(__file__), "assets", "characters")
@@ -60,7 +59,7 @@ class Inochi2DAssetProp:
 
     RETURN_TYPES = ("INOCHI_MODEL",)
     FUNCTION = "inject_asset"
-    CATEGORY = "Inochi2D"
+    CATEGORY = "Inochi2D 🎭"
 
     def inject_asset(self, inochi_model, category, asset_name, target_slot):
         props_path = os.path.join(os.path.dirname(__file__), "assets", "props")
@@ -93,7 +92,7 @@ class Inochi2DParameterControl:
 
     RETURN_TYPES = ("INOCHI_MODEL",)
     FUNCTION = "control_parameters"
-    CATEGORY = "Inochi2D"
+    CATEGORY = "Inochi2D 🎭"
 
     def control_parameters(self, inochi_model, head_x, head_y, eye_open, mouth_open, custom_params={}):
         controller = ParameterController()
@@ -128,7 +127,7 @@ class Inochi2DRenderer:
 
     RETURN_TYPES = ("IMAGE", "MASK")
     FUNCTION = "render"
-    CATEGORY = "Inochi2D"
+    CATEGORY = "Inochi2D 🎭"
 
     def render(self, inochi_model, width, height, aa_level):
         image, mask = _renderer_wrapper.render_frame(inochi_model, width, height, aa_level)
