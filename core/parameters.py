@@ -31,14 +31,21 @@ class ParameterController:
             try:
                 if set_param_direct:
                     set_param_direct(name, value)
+                    logger.debug(f"Set parameter {name} to {value} via direct method")
                 elif find_param:
                     param = find_param(name)
                     if param:
                         # Try setting value property or via method
                         if hasattr(param, 'value'):
                             param.value = value
+                            logger.debug(f"Set parameter {name} to {value} via property")
                         elif hasattr(param, 'set_value'):
                             param.set_value(value)
+                            logger.debug(f"Set parameter {name} to {value} via method")
+                        else:
+                            logger.warning(f"Parameter {name} found but has no settable value attribute.")
+                    else:
+                        logger.warning(f"Parameter {name} not found in puppet rig.")
                 else:
                     logger.warning("Puppet object provides no method to set parameters.")
                     break

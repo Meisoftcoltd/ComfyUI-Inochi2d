@@ -41,6 +41,7 @@ class Inochi2DLoader:
     CATEGORY = "Inochi2D 🎬"
 
     def load_model(self, model_file):
+        print(f"### [Inochi2D] Loading model: {model_file}")
         if model_file == "None":
             raise ValueError("No model file selected or available.")
 
@@ -71,6 +72,7 @@ class Inochi2DAssetProp:
     CATEGORY = "Inochi2D 🎬"
 
     def inject_asset(self, inochi_model, category, asset_name, target_slot):
+        print(f"### [Inochi2D] Injecting asset '{asset_name}' from '{category}' into slot '{target_slot}'")
         props_path = os.path.join(os.path.dirname(__file__), "assets", "props")
         manager = AssetsManager(props_path)
 
@@ -105,6 +107,7 @@ class Inochi2DParameterControl:
     CATEGORY = "Inochi2D 🎬"
 
     def control_parameters(self, inochi_model, head_x, head_y, eye_open, mouth_open, custom_params={}):
+        print(f"### [Inochi2D] Applying parameters (HeadX: {head_x}, HeadY: {head_y}, EyeOpen: {eye_open}, MouthOpen: {mouth_open})")
         controller = ParameterController()
 
         # Clone to respect ComfyUI's functional paradigm
@@ -141,5 +144,6 @@ class Inochi2DRenderer:
     CATEGORY = "Inochi2D 🎬"
 
     def render(self, inochi_model, width, height, aa_level):
+        print(f"### [Inochi2D] Rendering frame ({width}x{height}, AA: {aa_level})")
         image, mask = _renderer_wrapper.render_frame(inochi_model, width, height, aa_level)
         return (image, mask)
