@@ -64,6 +64,22 @@ Renderiza el estado actual del modelo a una imagen y una máscara.
   - `IMAGE`: La imagen renderizada (formato compatible con ComfyUI).
   - `MASK`: La máscara alfa del modelo, útil para post-procesamiento.
 
+## 🚀 Ejemplo de Flujo Completo
+
+Para empezar a usar estos nodos, puedes seguir este flujo típico:
+
+1. **Inochi2D Loader**: Carga tu modelo `.inp` o `.inx` desde `assets/characters`.
+2. **Inochi2D Asset Prop** (Opcional): Añade accesorios o cambia texturas en slots específicos del rig.
+3. **Inochi2D Parameter Control**: Ajusta la expresión (ojos, boca) y posición de la cabeza.
+4. **Inochi2D Renderer**: Genera la imagen final y su correspondiente máscara.
+
+### 📥 Importar Ejemplo
+Puedes encontrar un ejemplo de flujo de trabajo listo para usar en `examples/workflow.json`. Para cargarlo:
+- Arrastra el archivo JSON directamente a la interfaz de ComfyUI.
+- O utiliza el botón "Load" en el panel lateral de ComfyUI.
+
+> **Nota**: Asegúrate de tener al menos un modelo en `assets/characters/` para que el flujo cargue correctamente.
+
 ## 🔗 Referencias Originales
 
 Este proyecto no sería posible sin el increíble trabajo de la comunidad de Inochi2D:
