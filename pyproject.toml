@@ -3,9 +3,9 @@ name = "ComfyUI-Inochi2d"
 description = "Native Inochi2D rendering and manipulation for ComfyUI"
 version = "0.1.1"
 dependencies = [
-    "numpy>=1.26.0",
+    "numpy>=1.26.0,<2.3.0",
     "torch>=2.2.0",
-    "pyo3-inox2d>=0.6.5",
+    "inox2d @ git+https://github.com/Meisoftcoltd/inox2d@add-pip-installation-instructions-8991166843876750312",
     "python-osc>=1.8.3",
     "Pillow>=10.2.0"
 ]

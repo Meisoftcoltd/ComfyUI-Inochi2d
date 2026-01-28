@@ -6,6 +6,7 @@ import logging
 # CORRECCIÓN: Usar nombre correcto del paquete (inox2d en lugar de pyo3_inox2d)
 try:
     import inox2d as inox
+except ImportError:
     HAS_INOX2D = True
     logging.info(f"Inox2D loaded successfully! Spec: {getattr(inox, 'INOCHI2D_SPEC_VERSION', 'unknown')}")
 except ImportError as e:
@@ -19,6 +20,7 @@ logger = logging.getLogger("Inochi2D-Renderer")
 class InochiRendererWrapper:
     def __init__(self):
         if inox is None:
+            logger.warning("inox2d not found. Renderer will operate in mock mode.")
             logger.warning("="*70)
             logger.warning("inox2d not found. Renderer will operate in mock mode.")
             logger.warning("")
