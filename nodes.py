@@ -41,17 +41,32 @@ class Inochi2DLoader:
     CATEGORY = "Inochi2D 🎬"
 
     def load_model(self, model_file):
-        print(f"### [Inochi2D] Loading model: {model_file}")
         if model_file == "None":
             raise ValueError("No model file selected or available.")
 
+        print(f"### [Inochi2D] Cargando modelo: {model_file}")
         base_path = os.path.join(os.path.dirname(__file__), "assets", "characters")
         path = os.path.join(base_path, model_file)
 
         if not os.path.exists(path):
             raise FileNotFoundError(f"Model file not found: {path}")
 
-        puppet = _renderer_wrapper.load_model(path)
+        # Detection of PSD textures for .inx models
+        if model_file.endswith('.inx'):
+            psd_dir = os.path.join(os.path.dirname(path), "psd")
+            if os.path.exists(psd_dir):
+                for f in os.listdir(psd_dir):
+                    if f.endswith('.psd'):
+                        print(f"### [Inochi2D] Cargando texturas del archivo {f}")
+
+        # Fix: Change working directory to the model's directory to resolve relative paths in .inx
+        old_cwd = os.getcwd()
+        os.chdir(os.path.dirname(path))
+        try:
+            puppet = _renderer_wrapper.load_model(path)
+        finally:
+            os.chdir(old_cwd)
+
         return (puppet,)
 
 class Inochi2DAssetProp:
@@ -72,7 +87,7 @@ class Inochi2DAssetProp:
     CATEGORY = "Inochi2D 🎬"
 
     def inject_asset(self, inochi_model, category, asset_name, target_slot):
-        print(f"### [Inochi2D] Injecting asset '{asset_name}' from '{category}' into slot '{target_slot}'")
+        print(f"### [Inochi2D] Aplicando asset {asset_name} desde {category} en el slot {target_slot}")
         props_path = os.path.join(os.path.dirname(__file__), "assets", "props")
         manager = AssetsManager(props_path)
 
@@ -98,6 +113,7 @@ class Inochi2DParameterControl:
             },
             "optional": {
                 "custom_params": ("DICT", {"default": {}}),
+                "frame_number": ("INT", {"default": 0, "min": 0, "max": 1000000}),
             }
         }
 
@@ -106,8 +122,8 @@ class Inochi2DParameterControl:
     FUNCTION = "control_parameters"
     CATEGORY = "Inochi2D 🎬"
 
-    def control_parameters(self, inochi_model, head_x, head_y, eye_open, mouth_open, custom_params={}):
-        print(f"### [Inochi2D] Applying parameters (HeadX: {head_x}, HeadY: {head_y}, EyeOpen: {eye_open}, MouthOpen: {mouth_open})")
+    def control_parameters(self, inochi_model, head_x, head_y, eye_open, mouth_open, custom_params={}, frame_number=0):
+        print(f"### [Inochi2D] Gestionando frame {frame_number}: boca {mouth_open:.2f}, ojos {eye_open:.2f}, cabeza ({head_x:.2f}, {head_y:.2f})")
         controller = ParameterController()
 
         # Clone to respect ComfyUI's functional paradigm
@@ -144,6 +160,6 @@ class Inochi2DRenderer:
     CATEGORY = "Inochi2D 🎬"
 
     def render(self, inochi_model, width, height, aa_level):
-        print(f"### [Inochi2D] Rendering frame ({width}x{height}, AA: {aa_level})")
+        print(f"### [Inochi2D] Renderizando frame: {width}x{height}, AA: {aa_level}")
         image, mask = _renderer_wrapper.render_frame(inochi_model, width, height, aa_level)
         return (image, mask)
