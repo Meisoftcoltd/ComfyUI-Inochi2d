@@ -1,0 +1,69 @@
+{
+  "1": {
+    "inputs": {
+      "model_file": "personaje.inp"
+    },
+    "class_type": "Inochi2DLoader",
+    "_meta": {
+      "title": "📥 Inochi2D Loader"
+    }
+  },
+  "2": {
+    "inputs": {
+      "inochi_model": [
+        "1",
+        0
+      ],
+      "category": "props",
+      "asset_name": "item1",
+      "target_slot": "Hand_Slot"
+    },
+    "class_type": "Inochi2DAssetProp",
+    "_meta": {
+      "title": "👗 Inochi2D Asset Prop"
+    }
+  },
+  "3": {
+    "inputs": {
+      "inochi_model": [
+        "2",
+        0
+      ],
+      "head_x": 0,
+      "head_y": 0.1,
+      "eye_open": 0.9,
+      "mouth_open": 0.8
+    },
+    "class_type": "Inochi2DParameterControl",
+    "_meta": {
+      "title": "🎛️ Inochi2D Parameter Control"
+    }
+  },
+  "4": {
+    "inputs": {
+      "inochi_model": [
+        "3",
+        0
+      ],
+      "width": 1024,
+      "height": 1024,
+      "aa_level": 2
+    },
+    "class_type": "Inochi2DRenderer",
+    "_meta": {
+      "title": "🖼️ Inochi2D Renderer"
+    }
+  },
+  "5": {
+    "inputs": {
+      "images": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  }
+}
