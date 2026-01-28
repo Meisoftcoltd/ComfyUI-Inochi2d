@@ -96,6 +96,26 @@ Puedes encontrar un ejemplo de flujo de trabajo listo para usar en `examples/wor
 
 > **Nota**: Asegúrate de tener al menos un modelo en `assets/characters/` para que el flujo cargue correctamente.
 
+## 🛠️ Solución de Problemas (Troubleshooting)
+
+Si obtienes una imagen negra al renderizar, especialmente con modelos `.inx`, considera lo siguiente:
+
+### 1. Texturas Faltantes (Causa #1)
+Los archivos `.inx` son formatos de intercambio que dependen de archivos de textura externos (normalmente archivos `.png` con los atlas de texturas).
+- **Solución**: Asegúrate de que en la carpeta `assets/characters/` estén tanto el archivo `.inx` como todos los archivos `.png` que lo acompañan. Si la máscara se genera correctamente (blanca) pero la imagen es negra, esto confirma que faltan las texturas.
+
+### 2. Incompatibilidad del SDK
+El plugin utiliza `pyo3-inox2d >= 0.6.5`. Modelos exportados con versiones muy recientes de Inochi Creator (v0.9+) pueden no ser compatibles con la librería de renderizado actual.
+- **Solución**: Intenta re-exportar el modelo desde Inochi Creator usando el perfil de compatibilidad "Inochi2D v0.8" si está disponible.
+
+### 3. El "Puppet" está fuera de cámara
+Si el modelo original tiene coordenadas muy grandes o está muy desplazado del centro (0,0), el renderizador podría estar enfocando un área vacía del lienzo.
+- **Solución**: Ajusta los parámetros `head_x` y `head_y` en el nodo `Inochi2DParameterControl` para ver si el modelo aparece en pantalla, o verifica en Inochi Creator que el modelo esté centrado en el origen de la escena.
+
+### 4. Problemas de Dependencias (GPU/WGPU)
+Al utilizar bindings de Rust para hablar con la tarjeta gráfica, puede haber conflictos de "contexto" o drivers.
+- **Solución**: Revisa la consola de ComfyUI. Si ves errores que mencionan `WGPU Error` o `Shader compilation failed`, es probable que la librería no pueda inicializar la GPU correctamente. Asegúrate de tener drivers actualizados.
+
 ## 🔗 Referencias Originales
 
 Este proyecto no sería posible sin el increíble trabajo de la comunidad de Inochi2D:
