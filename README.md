@@ -12,17 +12,33 @@ Inochi2D es un estándar abierto para animación de marionetas 2D en tiempo real
 - Inyección dinámica de accesorios (assets) en slots del rig.
 - Renderizado de alta calidad con soporte para máscaras y anti-aliasing.
 
-## 📦 Instalación
+## 📦 Instalación y Actualización
+
+### Opción 1: Usando Git (Recomendado)
 
 1. Clona este repositorio en tu carpeta `custom_nodes` de ComfyUI:
    ```bash
    cd ComfyUI/custom_nodes
-   git clone https://github.com/Jules/ComfyUI-Inochi2d
+   git clone https://github.com/Meisoftcoltd/ComfyUI-Inochi2d
    ```
 2. Instala las dependencias necesarias:
    ```bash
    pip install -r requirements.txt
    ```
+
+Para actualizar, simplemente ejecuta `git pull` dentro de la carpeta del plugin.
+
+### Opción 2: Instalación Manual (ZIP)
+
+Si descargaste el repositorio como un archivo ZIP y lo extrajiste, no tendrás el directorio `.git` necesario para actualizaciones automáticas. Para habilitar las actualizaciones mediante Git en una instalación manual:
+
+1. Abre una terminal en la carpeta del plugin.
+2. Ejecuta el script de restauración:
+   ```bash
+   bash restore_git.sh
+   ```
+
+Esto inicializará el repositorio Git y te permitirá actualizar el plugin en el futuro.
 
 ## 📂 Estructura de Archivos
 
