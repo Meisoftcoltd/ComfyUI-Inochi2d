@@ -1,0 +1,5 @@
+numpy>=1.26.0
+torch>=2.2.0
+pyo3-inox2d>=0.6.5
+python-osc>=1.8.3
+Pillow>=10.2.0
