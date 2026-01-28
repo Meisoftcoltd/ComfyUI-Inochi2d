@@ -1,69 +1,198 @@
 {
-  "1": {
-    "inputs": {
-      "model_file": "personaje.inp"
-    },
-    "class_type": "Inochi2DLoader",
-    "_meta": {
-      "title": "📥 Inochi2D Loader"
-    }
-  },
-  "2": {
-    "inputs": {
-      "inochi_model": [
-        "1",
-        0
+  "last_node_id": 5,
+  "last_link_id": 4,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Inochi2DLoader",
+      "pos": [100, 100],
+      "size": [315, 82],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INOCHI_MODEL",
+          "type": "INOCHI_MODEL",
+          "links": [
+            1
+          ],
+          "shape": 3
+        }
       ],
-      "category": "props",
-      "asset_name": "item1",
-      "target_slot": "Hand_Slot"
-    },
-    "class_type": "Inochi2DAssetProp",
-    "_meta": {
-      "title": "👗 Inochi2D Asset Prop"
-    }
-  },
-  "3": {
-    "inputs": {
-      "inochi_model": [
-        "2",
-        0
-      ],
-      "head_x": 0,
-      "head_y": 0.1,
-      "eye_open": 0.9,
-      "mouth_open": 0.8
-    },
-    "class_type": "Inochi2DParameterControl",
-    "_meta": {
-      "title": "🎛️ Inochi2D Parameter Control"
-    }
-  },
-  "4": {
-    "inputs": {
-      "inochi_model": [
-        "3",
-        0
-      ],
-      "width": 1024,
-      "height": 1024,
-      "aa_level": 2
-    },
-    "class_type": "Inochi2DRenderer",
-    "_meta": {
-      "title": "🖼️ Inochi2D Renderer"
-    }
-  },
-  "5": {
-    "inputs": {
-      "images": [
-        "4",
-        0
+      "properties": {
+        "Node name for S&R": "Inochi2DLoader"
+      },
+      "widgets_values": [
+        "personaje.inp"
       ]
     },
-    "class_type": "PreviewImage",
-    "_meta": {
-      "title": "Preview Image"
+    {
+      "id": 2,
+      "type": "Inochi2DAssetProp",
+      "pos": [100, 250],
+      "size": [315, 150],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "inochi_model",
+          "type": "INOCHI_MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INOCHI_MODEL",
+          "type": "INOCHI_MODEL",
+          "links": [
+            2
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Inochi2DAssetProp"
+      },
+      "widgets_values": [
+        "props",
+        "item1",
+        "Hand_Slot"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Inochi2DParameterControl",
+      "pos": [100, 450],
+      "size": [315, 200],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "inochi_model",
+          "type": "INOCHI_MODEL",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INOCHI_MODEL",
+          "type": "INOCHI_MODEL",
+          "links": [
+            3
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Inochi2DParameterControl"
+      },
+      "widgets_values": [
+        0,
+        0.1,
+        0.9,
+        0.8
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Inochi2DRenderer",
+      "pos": [500, 100],
+      "size": [315, 130],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "inochi_model",
+          "type": "INOCHI_MODEL",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4
+          ],
+          "shape": 3
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Inochi2DRenderer"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        2
+      ]
+    },
+    {
+      "id": 5,
+      "type": "PreviewImage",
+      "pos": [500, 300],
+      "size": [400, 400],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
     }
-  }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "INOCHI_MODEL"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "INOCHI_MODEL"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      0,
+      "INOCHI_MODEL"
+    ],
+    [
+      4,
+      4,
+      0,
+      5,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
 }
