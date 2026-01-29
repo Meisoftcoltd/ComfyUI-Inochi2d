@@ -1,5 +1,21 @@
-numpy>=1.26.0
+numpy>=1.26.0,<2.3.0
 torch>=2.2.0
-pyo3-inox2d>=0.6.5
 python-osc>=1.8.3
 Pillow>=10.2.0
+
+
+# Instalación condicional de Inox2D según el sistema
+# Windows 64-bit
+inox2d @ https://github.com/Meisoftcoltd/inox2d/raw/main/inox2d-python/inox2d-0.3.0-cp38-abi3-win_amd64.whl ; sys_platform == 'win32' and platform_machine == 'AMD64'
+
+# Windows 32-bit (opcional)
+inox2d @ https://github.com/Meisoftcoltd/inox2d/raw/main/inox2d-python/inox2d-0.3.0-cp38-abi3-win32.whl ; sys_platform == 'win32' and platform_machine == 'x86'
+
+# Linux 64-bit (para Colab, RunPod o servidores Linux)
+inox2d @ https://github.com/Meisoftcoltd/inox2d/raw/main/inox2d-python/inox2d-0.3.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl ; sys_platform == 'linux'
+
+# MacOS Intel
+inox2d @ https://github.com/Meisoftcoltd/inox2d/raw/main/inox2d-python/inox2d-0.3.0-cp38-abi3-macosx_10_12_x86_64.whl ; sys_platform == 'darwin' and platform_machine == 'x86_64'
+
+# MacOS Apple Silicon (M1/M2/M3)
+inox2d @ https://github.com/Meisoftcoltd/inox2d/raw/main/inox2d-python/inox2d-0.3.0-cp38-abi3-macosx_11_0_arm64.whl ; sys_platform == 'darwin' and platform_machine == 'arm64'
