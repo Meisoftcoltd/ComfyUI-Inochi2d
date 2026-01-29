@@ -14,22 +14,6 @@ Inochi2D es un estándar abierto para animación de marionetas 2D en tiempo real
 
 ## 📦 Instalación y Actualización
 
-### Requisitos Previos (Inox2D)
-
-Este plugin depende de **Inox2D**. Aunque se intenta instalar automáticamente mediante `requirements.txt`, es posible que necesites compilarlo manualmente si encuentras problemas:
-
-1. Asegúrate de tener instalado el toolchain de **Rust** (Cargo).
-2. Instala `maturin`:
-   ```bash
-   pip install maturin
-   ```
-3. Instala `inox2d` desde el repositorio:
-   ```bash
-   git clone https://github.com/Meisoftcoltd/inox2d
-   cd inox2d
-   pip install .
-   ```
-
 ### Opción 1: Usando Git (Recomendado)
 
 1. Clona este repositorio en tu carpeta `custom_nodes` de ComfyUI:
@@ -137,9 +121,9 @@ Al utilizar bindings de Rust para hablar con la tarjeta gráfica, puede haber co
 Este proyecto no sería posible sin el increíble trabajo de la comunidad de Inochi2D:
 
 - **[Inochi2D](https://github.com/Inochi2D/inochi2d)**: El estándar y SDK original.
-- **[Inox2D](https://github.com/Meisoftcoltd/inox2d)**: La implementación nativa en Rust utilizada para el renderizado (Fork de [Inochi2D/inox2d](https://github.com/Inochi2D/inox2d)).
+- **[Inox2D](https://github.com/Inochi2D/inox2d)**: La implementación nativa en Rust utilizada para el renderizado.
 - **[Inochi Creator](https://github.com/Inochi2D/inochi-creator)**: La herramienta oficial para crear y riggear modelos Inochi2D.
-- **[inox2d (Python Bindings)](https://github.com/Meisoftcoltd/inox2d)**: Los bindings de Python que permiten la comunicación entre ComfyUI e Inox2D.
+- **[pyo3-inox2d]**: Los bindings de Python que permiten la comunicación entre ComfyUI e Inox2D.
 
 ## ⚖️ Licencia
 
