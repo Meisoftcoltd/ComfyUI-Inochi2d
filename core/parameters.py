@@ -24,11 +24,19 @@ class ParameterController:
         # Common patterns: puppet.find_parameter(name).value = val
         # or puppet.set_parameter(name, val)
 
-        find_param = getattr(puppet, 'find_parameter', None) or getattr(puppet, 'get_parameter', None)
+        find_param = (
+            getattr(puppet, 'find_parameter', None) or
+            getattr(puppet, 'get_parameter', None) or
+            getattr(puppet, 'findParameter', None) or
+            getattr(puppet, 'getParameter', None)
+        )
         set_param_direct = (
             getattr(puppet, 'set_parameter', None) or
             getattr(puppet, 'set_param', None) or
-            getattr(puppet, 'set_parameter_value', None)
+            getattr(puppet, 'set_parameter_value', None) or
+            getattr(puppet, 'setParameter', None) or
+            getattr(puppet, 'setParam', None) or
+            getattr(puppet, 'setValue', None)
         )
 
         for name, value in params_dict.items():
