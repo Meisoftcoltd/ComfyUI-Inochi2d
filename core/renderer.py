@@ -116,10 +116,13 @@ class InochiRendererWrapper:
             if hasattr(renderer, 'clear'): renderer.clear()
             if hasattr(renderer, 'draw'): renderer.draw(puppet)
 
-            # Retrieve buffer
-            read_pixels = getattr(renderer, 'read_pixels', None) or \
-                          getattr(renderer, 'get_pixels', None) or \
-                          getattr(renderer, 'pixels', None)
+            # Retrieve buffer - robust lookup of various possible API names
+            read_pixels = (
+                getattr(renderer, 'read_pixels', None) or
+                getattr(renderer, 'get_pixels', None) or
+                getattr(renderer, 'get_rgba', None) or
+                getattr(renderer, 'capture', None)
+            )
 
             if not read_pixels:
                 raise RuntimeError("Renderer has no pixel retrieval method.")

@@ -25,7 +25,11 @@ class ParameterController:
         # or puppet.set_parameter(name, val)
 
         find_param = getattr(puppet, 'find_parameter', None) or getattr(puppet, 'get_parameter', None)
-        set_param_direct = getattr(puppet, 'set_parameter', None)
+        set_param_direct = (
+            getattr(puppet, 'set_parameter', None) or
+            getattr(puppet, 'set_param', None) or
+            getattr(puppet, 'set_parameter_value', None)
+        )
 
         for name, value in params_dict.items():
             try:
